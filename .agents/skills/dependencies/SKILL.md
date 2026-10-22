@@ -22,7 +22,7 @@ description: npm 의존성·pnpm·Node·GitHub Actions 버전을 추가하거나
 
 - 이유: 공급망 공격은 대개 배포 직후 며칠 안에 발견·회수된다.
 - 예외는 보안 수정 하나다. 그 버전(과 그 버전이 새로 끌어오는 의존성)을 `pnpm-workspace.yaml` 의 `minimumReleaseAgeExclude` 에 advisory 와 함께 넣는다. `minimumReleaseAgeExcludePrune` 이 lockfile 이 더 쓰지 않는 항목을 지우므로, 설치가 실패한 채로 다시 설치하면 넣은 항목이 사라진다. 지워졌으면 다시 넣는다.
-- GitHub Actions·컨테이너 이미지도 같은 기준이다. 액션은 커밋 SHA 와 `# vX.Y.Z` 주석으로, 컨테이너 이미지는 digest 로 고정한다(서비스 이미지는 `태그@digest`). 같은 태그도 digest 가 자주 바뀌므로 손으로 고를 때는 7일 지난 digest 를 고르고, 이후 갱신 시점은 Renovate 의 `minimumReleaseAge` 가 정한다. CI 의 postgres 메이저는 운영 DB 에 맞춰 사람이 올린다(Renovate 는 메이저를 올리지 않는다). pipx 로 도는 zizmor 는 잡 env 의 `ZIZMOR` 한 곳에 버전을 두고 `renovate.json` 의 customManager 가 올린다.
+- GitHub Actions·컨테이너 이미지도 같은 기준이다. 액션은 커밋 SHA 와 `# vX.Y.Z` 주석으로, 컨테이너 이미지는 digest 로 고정한다(postgres 는 `태그@digest`). 같은 태그도 digest 가 자주 바뀌므로 손으로 고를 때는 7일 지난 digest 를 고르고, 이후 갱신 시점은 Renovate 의 `minimumReleaseAge` 가 정한다. CI 의 postgres 이미지는 `test` 잡 env `POSTGRES_IMAGE` 에 있고 customManager 가 올린다. 메이저는 운영 DB 에 맞춰 사람이 올린다(Renovate 는 메이저를 올리지 않는다). pipx 로 도는 zizmor 는 잡 env 의 `ZIZMOR` 한 곳에 버전을 두고 `renovate.json` 의 customManager 가 올린다.
 
 ### DEP-02 — lockfile
 

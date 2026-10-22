@@ -17,6 +17,7 @@ concurrency:
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
+  # A job whose inputs match a run that already passed skips install and run (see the fingerprint steps).
   verify:
     runs-on: ubuntu-26.04-arm
     timeout-minutes: 5
@@ -24,35 +25,49 @@ jobs:
       fail-fast: false
       matrix:
         task: ['format:check', audit]
+    env:
+      # audit is time-dependent (new advisories land without any file changing), so it always runs.
+      REUSE: ${{ matrix.task != 'audit' }}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
 
-      - uses: ./.github/actions/setup
+      - id: fingerprint
+        run: echo "key=verified-${{ matrix.task }}-${{ runner.arch }}-${{ hashFiles('**', '!.git/**') }}" >> "$GITHUB_OUTPUT"
 
-      - run: pnpm run ${{ matrix.task }}
+      - if: env.REUSE == 'true'
+        id: verified
+        uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: .verified
+          key: ${{ steps.fingerprint.outputs.key }}
+          lookup-only: true
+
+      - if: steps.verified.outputs.cache-hit != 'true'
+        uses: ./.github/actions/setup
+
+      - if: steps.verified.outputs.cache-hit != 'true'
+        run: pnpm run ${{ matrix.task }}
+
+      - if: env.REUSE == 'true' && steps.verified.outputs.cache-hit != 'true'
+        run: touch .verified
+
+      - if: env.REUSE == 'true' && steps.verified.outputs.cache-hit != 'true'
+        uses: actions/cache/save@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: .verified
+          key: ${{ steps.fingerprint.outputs.key }}
 
   # Boots the server against the schema in waline.pgsql, so an auto-merged Waline or DiceBear update that hangs the
   # boot or breaks the comment API fails here instead of in production.
   test:
     runs-on: ubuntu-26.04-arm
     timeout-minutes: 10
-    services:
-      postgres:
-        image: postgres:17.10-alpine@sha256:742f40ea20b9ff2ff31db5458d127452988a2164df9e17441e191f3b72252193
-        env:
-          POSTGRES_DB: waline
-          POSTGRES_PASSWORD: waline
-        ports:
-          - 5432:5432
-        # Over TCP: the image's first-boot init server listens only on the socket, then restarts.
-        options: >-
-          --health-cmd "pg_isready -h 127.0.0.1 -U postgres -d waline"
-          --health-interval 2s
-          --health-timeout 5s
-          --health-retries 15
     env:
+      # Started by a step rather than as a service so a reused run does not pull and boot it. Renovate updates this
+      # line through a customManager.
+      POSTGRES_IMAGE: postgres:17.10-alpine@sha256:742f40ea20b9ff2ff31db5458d127452988a2164df9e17441e191f3b72252193
       PG_HOST: 127.0.0.1
       PG_PORT: 5432
       PG_DB: waline
@@ -66,13 +81,44 @@ jobs:
         with:
           persist-credentials: false
 
-      - env:
-          CONTAINER: ${{ job.services.postgres.id }}
-        run: docker exec -i "$CONTAINER" psql -v ON_ERROR_STOP=1 -q -U postgres -d waline < waline.pgsql
+      # Docs and agent guides cannot change what the server does.
+      - id: fingerprint
+        run: echo "key=verified-test-${{ runner.arch }}-${{ hashFiles('**', '!.git/**', '!**/*.md', '!.agents/**', '!.claude/**') }}" >> "$GITHUB_OUTPUT"
 
-      - uses: ./.github/actions/setup
+      - id: verified
+        uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: .verified
+          key: ${{ steps.fingerprint.outputs.key }}
+          lookup-only: true
 
-      - run: pnpm test
+      # The image runs waline.pgsql on first boot. Readiness is checked over TCP because the init server it boots
+      # first listens only on the socket, then restarts.
+      - if: steps.verified.outputs.cache-hit != 'true'
+        run: |
+          docker run -d --name postgres -p 5432:5432 -e POSTGRES_DB="$PG_DB" -e POSTGRES_PASSWORD="$PG_PASSWORD" \
+            -v "$PWD/waline.pgsql:/docker-entrypoint-initdb.d/waline.sql:ro" "$POSTGRES_IMAGE"
+          for _ in $(seq 30); do
+            docker exec postgres pg_isready -h 127.0.0.1 -U "$PG_USER" -d "$PG_DB" -q && exit 0
+            sleep 1
+          done
+          docker logs postgres
+          exit 1
+
+      - if: steps.verified.outputs.cache-hit != 'true'
+        uses: ./.github/actions/setup
+
+      - if: steps.verified.outputs.cache-hit != 'true'
+        run: pnpm test
+
+      - if: steps.verified.outputs.cache-hit != 'true'
+        run: touch .verified
+
+      - if: steps.verified.outputs.cache-hit != 'true'
+        uses: actions/cache/save@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: .verified
+          key: ${{ steps.fingerprint.outputs.key }}
 
   actionlint:
     runs-on: ubuntu-26.04-arm
