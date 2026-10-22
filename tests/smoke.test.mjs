@@ -14,7 +14,7 @@ let base;
 let server;
 
 before(async () => {
-  server = createServer(require('../index.cjs'));
+  server = createServer(require('../api/index.js'));
   await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
   base = `http://127.0.0.1:${server.address().port}`;
 });

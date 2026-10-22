@@ -108,6 +108,12 @@ jobs:
       - if: steps.verified.outputs.cache-hit != 'true'
         uses: ./.github/actions/setup
 
+      # Vercel's runtime only loads ES modules through require() with the flag in vercel.json's NODE_OPTIONS, and
+      # Waline requires ESM-only markdown plugins. Start from the flag off and add vercel.json's value, so dropping it
+      # fails here instead of taking every comment request down in production.
+      - if: steps.verified.outputs.cache-hit != 'true'
+        run: echo "NODE_OPTIONS=--no-experimental-require-module $(jq -r '.env.NODE_OPTIONS // ""' vercel.json)" >> "$GITHUB_ENV"
+
       - if: steps.verified.outputs.cache-hit != 'true'
         run: pnpm test
 
