@@ -49,6 +49,15 @@
       "matchStrings": ["ZIZMOR: zizmor==(?<currentValue>\\S+)"],
       "depNameTemplate": "zizmor",
       "datasourceTemplate": "pypi"
+    },
+    {
+      "customType": "regex",
+      "description": "CI starts PostgreSQL with docker run so a reused test job can skip it",
+      "managerFilePatterns": ["/^\\.github/workflows/.+\\.ya?ml$/"],
+      "matchStrings": [
+        "POSTGRES_IMAGE: (?<depName>[^:\\s]+):(?<currentValue>[^@\\s]+)@(?<currentDigest>sha256:[a-f0-9]+)"
+      ],
+      "datasourceTemplate": "docker"
     }
   ]
 }
