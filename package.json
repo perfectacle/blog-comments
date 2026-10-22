@@ -11,7 +11,7 @@
     "node": "24.x"
   },
   "dependencies": {
-    "@dicebear/core": "9.4.3",
+    "@dicebear/core": "10.7.0",
     "@dicebear/fun-emoji": "9.4.3",
     "@waline/vercel": "1.43.4"
   },
