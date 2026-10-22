@@ -2,6 +2,11 @@
   "github": {
     "silent": true
   },
+  "build": {
+    "env": {
+      "ENABLE_EXPERIMENTAL_COREPACK": "1"
+    }
+  },
   "env": {
     "NODE_OPTIONS": "--experimental-require-module"
   },
@@ -28,7 +33,5 @@
       "destination": "index.cjs"
     }
   ],
-  "regions": [
-    "sin1"
-  ]
+  "regions": ["sin1"]
 }

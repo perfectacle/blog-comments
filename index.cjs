@@ -16,7 +16,10 @@ const loadDicebear = () => {
 // The SVG is inlined because the hosted DiceBear API rate-limits a page that requests many icons at once.
 const avatarUrl = async ({ mail, nick }) => {
   const [{ createAvatar }, funEmoji] = await loadDicebear();
-  const id = String(mail || '').trim().toLowerCase() || String(nick || '').trim();
+  const email = String(mail || '')
+    .trim()
+    .toLowerCase();
+  const id = email || String(nick || '').trim();
 
   return createAvatar(funEmoji, {
     // Hashed so the email never appears in the response.
