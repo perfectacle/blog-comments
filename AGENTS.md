@@ -21,7 +21,7 @@
 
 | 하려는 일                                                                  | 읽을 정본                                              |
 | -------------------------------------------------------------------------- | ------------------------------------------------------ |
-| 서버 코드(`index.cjs`)·Vercel 설정(`vercel.json`)·DB 스키마를 바꾼다       | [waline-server](.agents/skills/waline-server/SKILL.md) |
+| 서버 코드(`api/index.js`)·Vercel 설정(`vercel.json`)·DB 스키마를 바꾼다    | [waline-server](.agents/skills/waline-server/SKILL.md) |
 | 의존성·pnpm·Node·Actions 버전을 바꾸거나 Renovate PR·`audit` 실패를 고친다 | [dependencies](.agents/skills/dependencies/SKILL.md)   |
 | 워크플로를 바꾸거나 CI 실패를 고친다                                       | [ci](.agents/skills/ci/SKILL.md)                       |
 | 워크트리·브랜치·커밋·PR 을 만들거나 정리한다                               | [git-workflow](.agents/skills/git-workflow/SKILL.md)   |

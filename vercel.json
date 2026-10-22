@@ -1,36 +1,20 @@
 {
+  "$schema": "https://openapi.vercel.sh/vercel.json",
   "github": {
     "silent": true
   },
-  "build": {
-    "env": {
-      "ENABLE_EXPERIMENTAL_COREPACK": "1"
+  "framework": null,
+  "installCommand": "pnpm install --frozen-lockfile",
+  "outputDirectory": "public",
+  "functions": {
+    "api/index.js": {
+      "includeFiles": "node_modules/{@mathjax/mathjax-newcm-font,mhchemparser,ip2region/data}/**/*"
     }
   },
-  "env": {
-    "NODE_OPTIONS": "--experimental-require-module"
-  },
-  "builds": [
-    {
-      "src": "robots.txt",
-      "use": "@vercel/static"
-    },
-    {
-      "src": "index.cjs",
-      "use": "@vercel/node",
-      "config": {
-        "includeFiles": [
-          "node_modules/@mathjax/mathjax-newcm-font/**/*",
-          "node_modules/mhchemparser/**/*",
-          "node_modules/ip2region/data/**"
-        ]
-      }
-    }
-  ],
   "rewrites": [
     {
-      "source": "/((?!robots\\.txt$).*)",
-      "destination": "index.cjs"
+      "source": "/(.*)",
+      "destination": "/api/index"
     }
   ],
   "regions": ["sin1"]

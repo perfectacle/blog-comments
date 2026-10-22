@@ -21,6 +21,12 @@
   },
   "packageRules": [
     {
+      "description": "Vercel reads only the major of engines.node; .node-version holds the exact version",
+      "matchDepNames": ["node"],
+      "matchDepTypes": ["engines"],
+      "rangeStrategy": "auto"
+    },
+    {
       "matchPackageNames": ["@dicebear/**"],
       "groupName": "dicebear"
     },
