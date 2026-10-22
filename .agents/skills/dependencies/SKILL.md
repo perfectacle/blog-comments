@@ -44,4 +44,4 @@ description: npm 의존성·pnpm·Node·GitHub Actions 버전을 추가하거나
 ## 참고
 
 - **Waline 과 DiceBear**: `@dicebear/core` 와 `@dicebear/fun-emoji` 는 Renovate 가 한 PR 로 묶는다. 버전이 어긋나면 아바타 생성이 깨진다.
-- **pnpm·Node 버전**은 `package.json` 의 `packageManager`(해시 포함)와 `.node-version` 이 정한다. 블로그 저장소와 같은 값을 쓴다. corepack 으로 활성화한다(`corepack enable pnpm`). Vercel 은 `engines.node` 의 메이저만 읽으므로 `24.x` 로 두고, Renovate 도 이 값은 고정하지 않는다(`rangeStrategy: auto`). 고정하면 `pin` 업데이트가 7일 쿨다운을 거치지 않고 최신 패치로 바로 머지된다.
+- **pnpm·Node 버전**은 `package.json` 의 `packageManager`(해시 포함)와 `.node-version` 이 정한다. 블로그 저장소와 같은 값을 쓴다. corepack 으로 활성화한다(`corepack enable pnpm`). Vercel 은 `engines.node` 의 메이저만 읽는다.

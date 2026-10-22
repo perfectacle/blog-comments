@@ -1,11 +1,11 @@
 ---
 name: waline-server
-description: 댓글 서버 코드(api/index.js), Vercel 설정(vercel.json), DB 스키마(waline.pgsql)를 바꾸거나 로컬에서 서버를 띄울 때. 댓글 경로, 아바타 시드, 비밀값, Vercel 빌드 구성.
+description: 댓글 서버 코드(index.cjs), Vercel 설정(vercel.json), DB 스키마(waline.pgsql)를 바꾸거나 로컬에서 서버를 띄울 때. 댓글 경로, 아바타 시드, 비밀값, Vercel 빌드 구성.
 ---
 
 # 댓글 서버
 
-이 스킬이 SRV-01, SRV-02, SRV-03 의 정본이다. 서버는 `@waline/vercel` 을 그대로 쓰고, `api/index.js` 에서 아바타 생성만 바꾼다. 클라이언트는 블로그 저장소의 `src/components/Comments.astro` 다.
+이 스킬이 SRV-01, SRV-02, SRV-03 의 정본이다. 서버는 `@waline/vercel` 을 그대로 쓰고, `index.cjs` 에서 아바타 생성만 바꾼다. 클라이언트는 블로그 저장소의 `src/components/Comments.astro` 다.
 
 ## 절차
 
@@ -42,7 +42,7 @@ Waline 은 클라이언트가 보낸 `path`(`/2022/06/06/slug/`)를 `wl_comment.
 
 - 이유: 시드·스타일·배경색을 바꾸면 옛 댓글을 포함한 모든 댓글의 아이콘이 바뀐다. 의도한 변경일 때만 바꾸고 PR 에 적는다.
 - 이메일은 해시로만 쓴다. 응답에 원문 이메일이 나가지 않아야 한다.
-- DiceBear 는 ESM 전용이라 `api/index.js` 위에서 `require` 하면 Waline 부팅이 멈춘다. 처음 쓸 때 `import()` 한다.
+- DiceBear 는 ESM 전용이라 `index.cjs` 위에서 `require` 하면 Waline 부팅이 멈춘다. 처음 쓸 때 `import()` 한다.
 
 ### SRV-03 — DB 와 비밀값
 
@@ -53,7 +53,7 @@ Waline 은 클라이언트가 보낸 `path`(`/2022/06/06/slug/`)를 `wl_comment.
 
 ## 참고
 
-- **Vercel 구성**: `api/index.js` 하나가 함수이고, `rewrites` 가 `public/` 에 없는 모든 경로를 그 함수로 보낸다. 정적 파일은 `outputDirectory` 인 `public/` 만 나가므로 저장소의 다른 파일(`waline.pgsql` 등)은 공개되지 않는다. `framework`·`installCommand`·`outputDirectory` 를 `vercel.json` 에 적어 대시보드 설정이 바뀌어도 배포가 흔들리지 않게 한다. 리전은 `sin1`. 레거시 `builds`·`env`·`build.env` 는 쓰지 않는다.
+- **Vercel 구성**: `vercel.json` 의 레거시 `builds` 로 `index.cjs` 하나를 함수로, `robots.txt` 를 정적 파일로 올린다. 그래서 대시보드의 빌드 설정은 쓰이지 않는다. 리전은 `sin1`.
 - **includeFiles**: Waline 이 실행 중에 파일 경로로 읽는 패키지(MathJax 폰트, mhchemparser, ip2region 데이터)는 번들러가 못 따라가서 `includeFiles` 로 넣는다. 평탄한 `node_modules` 경로를 가리키므로 `pnpm-workspace.yaml` 의 `nodeLinker: hoisted` 를 지운다면 이 경로도 고친다.
-- **pnpm**: Vercel 프로젝트 환경 변수 `ENABLE_EXPERIMENTAL_COREPACK=1`(Production·Preview)이 있어야 Vercel 이 `packageManager` 의 pnpm 버전을 쓴다. 빌드 로그의 `Detected ENABLE_EXPERIMENTAL_COREPACK=1 and "pnpm@…"` 줄로 확인한다. 빠지면 Vercel 이 lockfile 기준 pnpm 을 골라 쿨다운·`allowBuilds` 설정을 조용히 무시할 수 있다.
+- **pnpm**: `build.env.ENABLE_EXPERIMENTAL_COREPACK=1` 이 있어야 Vercel 이 `packageManager` 의 pnpm 버전을 쓴다. 빠지면 Vercel 기본 pnpm 이 쿨다운·`allowBuilds` 설정을 다르게 읽을 수 있다.
 - **배포**: Vercel Git 연동이 PR 마다 미리보기를, main 머지마다 운영 배포를 만든다(`github.silent` 로 PR 댓글은 끔). GitHub Actions 는 검사만 한다.
