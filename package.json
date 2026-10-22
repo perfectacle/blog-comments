@@ -1,8 +1,12 @@
 {
   "name": "blog-comments",
   "private": true,
-  "engines": { "node": "24.x" },
+  "engines": {
+    "node": "24.x"
+  },
   "dependencies": {
+    "@dicebear/core": "9.4.3",
+    "@dicebear/fun-emoji": "9.4.3",
     "@waline/vercel": "1.43.4"
   }
 }
