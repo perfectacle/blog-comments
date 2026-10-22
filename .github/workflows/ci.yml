@@ -1,0 +1,130 @@
+name: CI
+
+# Vercel's Git integration builds and deploys (PR → preview, main → production); this workflow only checks.
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  # PR runs are superseded by newer pushes; main runs always finish so every landed commit has a result.
+  group: ${{ github.workflow }}-${{ github.event_name == 'pull_request' && github.ref || github.sha }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  verify:
+    runs-on: ubuntu-26.04-arm
+    timeout-minutes: 5
+    strategy:
+      fail-fast: false
+      matrix:
+        task: ['format:check', audit]
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - uses: ./.github/actions/setup
+
+      - run: pnpm run ${{ matrix.task }}
+
+  # Boots the server against the schema in waline.pgsql, so an auto-merged Waline or DiceBear update that hangs the
+  # boot or breaks the comment API fails here instead of in production.
+  test:
+    runs-on: ubuntu-26.04-arm
+    timeout-minutes: 10
+    services:
+      postgres:
+        image: postgres:17.10-alpine@sha256:742f40ea20b9ff2ff31db5458d127452988a2164df9e17441e191f3b72252193
+        env:
+          POSTGRES_DB: waline
+          POSTGRES_PASSWORD: waline
+        ports:
+          - 5432:5432
+        # Over TCP: the image's first-boot init server listens only on the socket, then restarts.
+        options: >-
+          --health-cmd "pg_isready -h 127.0.0.1 -U postgres -d waline"
+          --health-interval 2s
+          --health-timeout 5s
+          --health-retries 15
+    env:
+      PG_HOST: 127.0.0.1
+      PG_PORT: 5432
+      PG_DB: waline
+      PG_USER: postgres
+      PG_PASSWORD: waline
+      # No outbound spam check from CI, and no per-IP rate limit between the test's own comments.
+      AKISMET_KEY: 'false'
+      IPQPS: 0
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - env:
+          CONTAINER: ${{ job.services.postgres.id }}
+        run: docker exec -i "$CONTAINER" psql -v ON_ERROR_STOP=1 -q -U postgres -d waline < waline.pgsql
+
+      - uses: ./.github/actions/setup
+
+      - run: pnpm test
+
+  actionlint:
+    runs-on: ubuntu-26.04-arm
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - uses: docker://rhysd/actionlint@sha256:b1934ee5f1c509618f2508e6eb47ee0d3520686341fec936f3b79331f9315667 # 1.7.12
+        with:
+          args: -color
+
+  zizmor:
+    runs-on: ubuntu-26.04-arm
+    timeout-minutes: 5
+    env:
+      # One place for the version: the cache key and the run both read it, and Renovate updates it.
+      ZIZMOR: zizmor==1.31.0
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - id: python
+        run: |
+          {
+            echo "version=$(python3 --version | cut -d ' ' -f 2)"
+            echo "pipx=$(pipx --version)"
+            echo "venvs=$(pipx environment --value PIPX_VENV_CACHEDIR)"
+            echo "pip=$(python3 -m pip cache dir)"
+          } >> "$GITHUB_OUTPUT"
+
+      - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: |
+            ${{ steps.python.outputs.venvs }}
+            ${{ steps.python.outputs.pip }}
+          key: zizmor-${{ runner.os }}-${{ runner.arch }}-python-${{ steps.python.outputs.version }}-pipx-${{ steps.python.outputs.pipx }}-${{ env.ZIZMOR }}
+
+      # Pin the interpreter too: pipx's run cache includes its Python path.
+      - run: pipx run --python "$(command -v python3)" "$ZIZMOR" --format github .github
+        env:
+          GH_TOKEN: ${{ github.token }}
+
+  # The one required status check on main: passes only when every job above passed.
+  ci-ok:
+    if: always()
+    needs: [verify, test, actionlint, zizmor]
+    runs-on: ubuntu-26.04-arm
+    timeout-minutes: 2
+    steps:
+      - if: contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled') || contains(needs.*.result, 'skipped')
+        run: exit 1
+      - run: echo ok

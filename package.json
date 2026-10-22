@@ -1,6 +1,12 @@
 {
   "name": "blog-comments",
   "private": true,
+  "scripts": {
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "node --test --test-force-exit --test-timeout=60000 \"tests/*.test.mjs\"",
+    "audit": "pnpm audit --prod --audit-level high"
+  },
   "engines": {
     "node": "24.x"
   },
@@ -8,5 +14,9 @@
     "@dicebear/core": "9.4.3",
     "@dicebear/fun-emoji": "9.4.3",
     "@waline/vercel": "1.43.4"
-  }
+  },
+  "devDependencies": {
+    "prettier": "3.9.10"
+  },
+  "packageManager": "pnpm@12.13.0+sha512.1e55719bf26e809dce5c5084fdebaa64efb3da9038ae5d68a9f8a68311f1a45841c8c3b76a37298c3b66f6bcc80409a9b7f33c78a7168a3e90fb65a5d8235ae4"
 }

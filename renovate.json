@@ -1,0 +1,54 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:recommended", "helpers:pinGitHubActionDigestsToSemver"],
+  "timezone": "Asia/Seoul",
+  "labels": ["dependencies"],
+  "rangeStrategy": "pin",
+  "minimumReleaseAge": "7 days",
+  "internalChecksFilter": "strict",
+  "automerge": true,
+  "automergeType": "pr",
+  "platformAutomerge": true,
+  "automergeStrategy": "merge-commit",
+  "lockFileMaintenance": {
+    "enabled": true,
+    "schedule": ["before 6am on monday"]
+  },
+  "osvVulnerabilityAlerts": true,
+  "vulnerabilityAlerts": {
+    "minimumReleaseAge": null,
+    "labels": ["dependencies", "security"]
+  },
+  "packageRules": [
+    {
+      "matchPackageNames": ["@dicebear/**"],
+      "groupName": "dicebear"
+    },
+    {
+      "matchManagers": ["github-actions"],
+      "groupName": "github actions"
+    },
+    {
+      "description": "CI's database follows the production major, which is raised by hand",
+      "matchDepNames": ["postgres"],
+      "matchUpdateTypes": ["major"],
+      "enabled": false
+    },
+    {
+      "description": "Vercel runs the engines.node major, so a Node major needs a person to move both together",
+      "matchDepNames": ["node"],
+      "matchUpdateTypes": ["major"],
+      "automerge": false
+    }
+  ],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "description": "zizmor runs via pipx in the workflow",
+      "managerFilePatterns": ["/^\\.github/workflows/.+\\.ya?ml$/"],
+      "matchStrings": ["ZIZMOR: zizmor==(?<currentValue>\\S+)"],
+      "depNameTemplate": "zizmor",
+      "datasourceTemplate": "pypi"
+    }
+  ]
+}

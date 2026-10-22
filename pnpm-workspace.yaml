@@ -1,0 +1,40 @@
+# Only install versions published at least 7 days ago (supply-chain cooldown).
+minimumReleaseAge: 10080
+# Security fixes newer than the cooldown go in minimumReleaseAgeExclude; drop entries the lockfile no longer uses.
+minimumReleaseAgeExcludePrune: true
+
+# vercel.json `includeFiles` names packages by their flat node_modules path.
+nodeLinker: hoisted
+
+allowBuilds:
+  # Only backs Waline's SQLite storage; this server uses PostgreSQL.
+  better-sqlite3: false
+  # The postinstall script only prints a funding banner.
+  core-js-pure: false
+
+minimumReleaseAgeExclude:
+  # Security fix for the markdown-it override below, and the argparse release it requires.
+  - markdown-it@15.0.3
+  - argparse@3.0.3
+
+overrides:
+  # request pins ~2.3.2; GHSA-fjxv-7rqg-78g4, GHSA-hmw2-7cc7-3qxx. Reached through Akismet on every new comment.
+  request>form-data: 2.5.6
+  # Only the CloudBase storage adapter uses 0.x; 0.34 clears its advisories without leaving the 0.x API.
+  axios@<1: 0.34.0
+  # GHSA-gfr2-rv44-r23c (comment rendering). Reached as a peer of @mdit/*, which a lockfile refresh never re-resolves.
+  markdown-it@15: 15.0.3
+
+auditConfig:
+  # Advisories with no fix in the dependency's major, in storage adapters that only run when their own credentials
+  # are set. This server stores comments in PostgreSQL, so neither is ever called.
+  ignoreGhsas:
+    # protobufjs 5 via leancloud-storage (LeanCloud adapter); fixes need protobufjs 7.
+    - GHSA-66ff-xgx4-vchm
+    - GHSA-685m-2w69-288q
+    - GHSA-75px-5xx7-5xc7
+    - GHSA-jvwf-75h9-cwgg
+    - GHSA-wcpc-wj8m-hjx6
+    - GHSA-xq3m-2v4x-88gg
+    # lodash.set via @cloudbase/database (CloudBase adapter); unmaintained, no patched release.
+    - GHSA-p6mc-m468-83gw
