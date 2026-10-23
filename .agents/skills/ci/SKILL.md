@@ -35,6 +35,6 @@ main 은 `ci-ok` 와 `Vercel`(미리보기 배포) 체크 통과가 필수다(�
 
 ## 참고
 
-- **결과 재사용**: `verify`(format:check)와 `test` 는 입력 파일 해시로 "통과 표식"을 캐시해, 같은 입력으로 이미 통과했으면 설치·DB 기동·실행을 건너뛴다. `test` 의 입력에서는 문서(`**/*.md`, `.agents/`, `.claude/`)를 뺐다. `audit` 는 파일이 그대로여도 새 advisory 로 결과가 바뀌어 늘 돈다. 입력 범위를 바꾸는 변경(테스트가 새 파일을 읽는 등)은 그 잡의 fingerprint 패턴도 같이 고친다. 블로그와 달리 main 재검사 생략(`tested`)은 두지 않았다. 배포를 Vercel 이 따로 해서 main 검사를 건너뛰어도 배포가 빨라지지 않는다.
+- **결과 재사용**: `verify`(format:check)와 `test` 는 입력 파일 해시로 "통과 표식"을 캐시해, 같은 입력으로 이미 통과했으면 설치·DB 기동·실행을 건너뛴다. `test` 의 입력에서는 문서(`**/*.md`, `.agents/`, `.claude/`)를 뺐다. `audit` 는 파일이 그대로여도 새 advisory 로 결과가 바뀌어 재사용하지 않는다. 대신 PR 에서는 의존성 파일을 바꾼 PR 에서만 돌고, 새 advisory 는 매일 도는 `audit.yml` 이 수정 PR 을 열어 고친다([dependencies](../dependencies/SKILL.md#절차--audit-이-새-advisory-로-실패했을-때)). 입력 범위를 바꾸는 변경(테스트가 새 파일을 읽는 등)은 그 잡의 fingerprint 패턴도 같이 고친다. 블로그와 달리 main 재검사 생략(`tested`)은 두지 않았다. 배포를 Vercel 이 따로 해서 main 검사를 건너뛰어도 배포가 빨라지지 않는다.
 - **보안 점검**: `zizmor` 잡이 워크플로를 검사한다. checkout 에는 `persist-credentials: false`(이 워크플로는 push 하지 않는다). 외부 액션은 커밋 SHA 로 고정한다(저장소 설정이 강제한다).
 - **공용 구성**: `.github/actions/setup`, `actionlint.yaml`, `zizmor.yml`, 러너 라벨은 블로그 저장소와 같은 것을 쓴다. 한쪽을 고치면 다른 쪽도 맞출지 본다.
