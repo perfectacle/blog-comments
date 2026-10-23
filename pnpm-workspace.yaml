@@ -18,6 +18,8 @@ overrides:
   axios@<1: 0.34.0
   # GHSA-gfr2-rv44-r23c (comment rendering). Reached as a peer of @mdit/*, which a lockfile refresh never re-resolves.
   markdown-it@15: 15.0.3
+  # GHSA-cg2g-xh64-v4q7, GHSA-mrv2-3pqr-j5jr; pinned by the audit workflow.
+  dompurify@3: 3.4.17
 
 auditConfig:
   # Advisories with no fix in the dependency's major, in storage adapters that only run when their own credentials
