@@ -46,7 +46,7 @@ description: npm 의존성·pnpm·Node·GitHub Actions 버전을 추가하거나
 
 `audit` 잡은 운영 의존성의 high 이상 advisory 로 실패한다. 먼저 [위 절차](#절차--audit-이-새-advisory-로-실패했을-때)로 Renovate 가 고칠 수 있는지 보고, 손으로 고칠 때는 아래 순서를 따른다.
 
-1. 같은 메이저 안에 수정 버전이 있으면 `pnpm-workspace.yaml` 의 `overrides` 로 올린다. Waline 의 peer 로 들어온 패키지는 lockfile 갱신으로 다시 풀리지 않아 override 가 필요하다. Waline 이 수정 버전을 직접 요구하게 되면 override 를 지운다.
+1. 같은 메이저 안에 수정 버전이 있으면 `pnpm-workspace.yaml` 의 `overrides` 로 올린다. Waline 의 peer 로 들어온 패키지는 lockfile 갱신으로 다시 풀리지 않아 override 가 필요하다. Waline 이 수정 버전을 직접 요구하게 되면 override 를 지운다. Renovate 는 override 의 마이너·패치만 올리고 메이저는 올리지 않는다(`renovate.json`). override 는 의존하는 패키지가 기대하는 메이저 안에서 고정한 값이라, 메이저를 넘기면 그 패키지가 기대하는 API 가 바뀐다.
 2. 수정이 메이저 변경을 요구하거나 수정 버전이 없고, 그 코드가 이 서버에서 실행되지 않을 때만 `auditConfig.ignoreGhsas` 에 넣는다. 지금은 LeanCloud·CloudBase 저장소 어댑터가 그렇다. 이 서버는 PostgreSQL 을 쓰므로 두 어댑터는 자격 증명이 없어 호출되지 않는다.
 3. 실행되는 코드인데 수정이 없으면 PR 에 advisory 와 영향 여부를 적고 저장소 주인에게 넘긴다.
 
