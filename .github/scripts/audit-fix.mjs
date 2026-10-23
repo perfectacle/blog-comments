@@ -12,6 +12,7 @@ import { appendFileSync, readFileSync, writeFileSync } from 'node:fs';
 const WORKSPACE = 'pnpm-workspace.yaml';
 const LEVELS = new Set(['high', 'critical']);
 
+// pnpm defaults to --frozen-lockfile on CI, which would refuse every lockfile change this script makes.
 const run = (cmd, args) => spawnSync(cmd, args, { encoding: 'utf8', maxBuffer: 256 * 1024 * 1024 });
 
 const npmView = (spec, field) => {
@@ -100,7 +101,7 @@ const isYoung = spec => !(Date.now() - releasedAt(spec) >= COOLDOWN_MS);
 // Installs, adding every release the cooldown rejects (the fix and anything new it pulls in) as an exception.
 const install = advisory => {
   for (let attempt = 0; attempt < 5; attempt++) {
-    const { status, stdout, stderr } = run('pnpm', ['install']);
+    const { status, stdout, stderr } = run('pnpm', ['install', '--no-frozen-lockfile']);
     if (status === 0) return true;
     const young = [...`${stdout}\n${stderr}`.matchAll(/(\S+@\d[^\s]*) was published at/g)].map(m => m[1]);
     if (!young.length) {
@@ -165,7 +166,7 @@ for (const name of [...new Set(found.map(a => a.module_name))]) {
     if (install(ids)) report.push(`- \`${name}@${major}\`: ${ids} fixed by overriding to ${target}`);
     else {
       writeFileSync(WORKSPACE, before);
-      run('pnpm', ['install']);
+      run('pnpm', ['install', '--no-frozen-lockfile']);
       unresolved.push(`- \`${name}@${major}\`: ${ids} could not install ${target}`);
     }
   }
