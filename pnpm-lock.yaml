@@ -172,16 +172,13 @@ importers:
 
   .:
     dependencies:
-      '@dicebear/core':
-        specifier: 9.4.3
-        version: 9.4.3
-      '@dicebear/fun-emoji':
-        specifier: 9.4.3
-        version: 9.4.3(@dicebear/core@9.4.3)
       '@waline/vercel':
         specifier: 1.43.4
         version: 1.43.4(@noble/hashes@1.8.0)(@types/node@26.6.5)(aws4@1.13.2)(debug@4.4.3)
     devDependencies:
+      '@iconify-json/noto':
+        specifier: 1.2.9
+        version: 1.2.9
       prettier:
         specifier: 3.9.10
         version: 3.9.10
@@ -292,16 +289,6 @@ packages:
     resolution: {integrity: sha512-OoKoR0f76dCY666JlcbhmVTs2drYj1GUXZTYTcbUgJjh9Nv41aFfZ21bPQTERm5+L5cBDo466NltB2lplS5GBw==}
     engines: {node: '>=20.19.0'}
 
-  '@dicebear/core@9.4.3':
-    resolution: {integrity: sha512-9ITrQI57k3p5hKuU8HZJ1d0kPdrmTKEJDOdlKQ8CpaChbtmnD1R+dtWmNz5IesYThXM8F64pJ0ZvJ2rsY8Hciw==}
-    engines: {node: '>=18.0.0'}
-
-  '@dicebear/fun-emoji@9.4.3':
-    resolution: {integrity: sha512-7zO+bJzKNbFAE0FOwP4IvP2sVnemGxYYsHVWYSXj5ZiWibcsEDLSmCanZZgbfzsHaDvh7Y8mKK6dynbnCUGJDA==}
-    engines: {node: '>=18.0.0'}
-    peerDependencies:
-      '@dicebear/core': ^9.0.0
-
   '@exodus/bytes@1.16.0':
     resolution: {integrity: sha512-IcpW84uEn3N7ETtNZMlxKhfl6Pec8rUNGOTBtWbK1FKhJxIFAptZyVrvVRVBimAJxJCgc3PxepxkdWWG4DVzfA==}
     engines: {node: ^20.19.0 || ^22.12.0 || >=24.0.0}
@@ -316,6 +303,12 @@ packages:
 
   '@fast-csv/parse@5.0.8':
     resolution: {integrity: sha512-i2R1TWa2tgRn9YEsNplzdCv0z8J1O85nUIqPdAQtQOheZ+Pw/3AhekI27Yp095r7qSJK0l8KwphK8WzB3aCtog==}
+
+  '@iconify-json/noto@1.2.9':
+    resolution: {integrity: sha512-DQiuXENbun41ch+XPSV55H9FaWKpHTyz46YIKtSaKYD4fIDDzL1tR6H4np/T38jfrTAeI3rcKF0mqHYeZVAuaw==}
+
+  '@iconify/types@2.0.0':
+    resolution: {integrity: sha512-+wluvCrRhXrhyOmRDJ3q8mux9JkKy5SJ/v8ol2tu4FVjyYvtEzkc/3pK15ET6RKg4b4w4BmTk1+gsCUhf21Ykg==}
 
   '@koa/cors@5.0.0':
     resolution: {integrity: sha512-x/iUDjcS90W69PryLDIMgFyV21YLTnG9zOpPXS7Bkt2b8AsY3zZsIpOLBkYr9fBcF3HbkKaER5hOBZLfpLgYNw==}
@@ -452,9 +445,6 @@ packages:
 
   '@types/cookiejar@2.1.5':
     resolution: {integrity: sha512-he+DHOWReW0nghN24E1WUqM0efK4kI9oTqDm6XmK8ZPe2djZ90BSNdGnIyCLzCPw7/pogPlGbzI2wHGGmi4O/Q==}
-
-  '@types/json-schema@7.0.15':
-    resolution: {integrity: sha512-5+fP8P8MFNC+AyZCDxrB2pkZFPGzqQWUzpSeuuVLvm8VMcorNYavBqoFcxK8bQz4Qsbn4oUEEem4wDLfcysGHA==}
 
   '@types/node@26.6.5':
     resolution: {integrity: sha512-uMzsv9stDdofIZBx4UGh4Z9ZgXnGC9seRDscilBcTHAeOFk67MZg/k9bWVfO+bk4qZmG+l52hRnLwUiH2LnJTg==}
@@ -2224,14 +2214,6 @@ snapshots:
 
   '@csstools/css-tokenizer@4.0.2': {}
 
-  '@dicebear/core@9.4.3':
-    dependencies:
-      '@types/json-schema': 7.0.15
-
-  '@dicebear/fun-emoji@9.4.3(@dicebear/core@9.4.3)':
-    dependencies:
-      '@dicebear/core': 9.4.3
-
   '@exodus/bytes@1.16.0(@noble/hashes@1.8.0)':
     optionalDependencies:
       '@noble/hashes': 1.8.0
@@ -2239,6 +2221,12 @@ snapshots:
   '@fast-csv/format@5.0.8': {}
 
   '@fast-csv/parse@5.0.8': {}
+
+  '@iconify-json/noto@1.2.9':
+    dependencies:
+      '@iconify/types': 2.0.0
+
+  '@iconify/types@2.0.0': {}
 
   '@koa/cors@5.0.0':
     dependencies:
@@ -2369,8 +2357,6 @@ snapshots:
   '@types/clone@2.1.4': {}
 
   '@types/cookiejar@2.1.5': {}
-
-  '@types/json-schema@7.0.15': {}
 
   '@types/node@26.6.5':
     dependencies:

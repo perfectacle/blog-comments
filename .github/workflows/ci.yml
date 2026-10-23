@@ -59,8 +59,8 @@ jobs:
           path: .verified
           key: ${{ steps.fingerprint.outputs.key }}
 
-  # Boots the server against the schema in waline.pgsql, so an auto-merged Waline or DiceBear update that hangs the
-  # boot or breaks the comment API fails here instead of in production.
+  # Boots the server against the schema in waline.pgsql, so an auto-merged Waline update that hangs the boot or
+  # breaks the comment API fails here instead of in production.
   test:
     runs-on: ubuntu-26.04-arm
     timeout-minutes: 10
