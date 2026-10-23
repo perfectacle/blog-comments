@@ -14,6 +14,17 @@ description: npm 의존성·pnpm·Node·GitHub Actions 버전을 추가하거나
 2. **깨끗한 설치로 검증한다** — `rm -rf node_modules && pnpm install --frozen-lockfile` 후 `pnpm run audit`, `pnpm format:check`, smoke 테스트([waline-server 절차](../waline-server/SKILL.md#절차))를 돌린다.
    완료: 전부 통과.
 
+## 절차 — `audit` 이 새 advisory 로 실패했을 때
+
+`audit` 은 파일이 그대로여도 새 advisory 가 나오면 실패해서, 같은 시점의 모든 PR 이 함께 깨진다. 여러 세션이 각자 고치면 같은 PR 이 여러 개 생기므로 손으로 고치기 전에 아래 순서를 지킨다.
+
+1. **이미 고치고 있는 PR 이 있는지 본다** — `gh pr list --state open --search "<패키지>"` 와 Renovate PR(`--author app/renovate`)을 본다.
+   완료: 같은 패키지를 올리는 열린 PR 이 없다. 있으면 그 PR 이 머지되기를 기다린다. 깨진 다른 PR 은 main 에 수정이 들어간 뒤 다시 돌린다(Renovate PR 은 본문의 rebase 체크박스).
+2. **수정 버전이 쿨다운을 지났으면 Renovate 에 맡긴다** — 직접 의존성은 Renovate 취약점 PR 이 쿨다운 없이 올라온다. 간접 의존성은 매일 도는 lockfile maintenance 가 올리지만, 기다릴 수 없으면 Renovate 대시보드 이슈(`Dependency Dashboard`)의 lock file maintenance 체크박스를 켜서 바로 PR 을 만들게 한다.
+   완료: Renovate PR 이 열렸다.
+3. **Renovate 가 못 고치는 경우만 손으로 고친다** — 수정 버전이 쿨다운 안이면 [DEP-01](#dep-01--7일-쿨다운) 예외로 넣는다. 범위 밖이라 lockfile 갱신으로 안 올라가면 `overrides` 를 쓴다. 브랜치는 [git-workflow](../git-workflow/SKILL.md) 절차 0 부터 따른다.
+   완료: 새 커밋의 `audit` 이 통과한다.
+
 ## 규칙
 
 ### DEP-01 — 7일 쿨다운
@@ -33,7 +44,7 @@ description: npm 의존성·pnpm·Node·GitHub Actions 버전을 추가하거나
 
 ### DEP-03 — audit 예외
 
-`audit` 잡은 운영 의존성의 high 이상 advisory 로 실패한다. 고치는 순서는 다음과 같다.
+`audit` 잡은 운영 의존성의 high 이상 advisory 로 실패한다. 먼저 [위 절차](#절차--audit-이-새-advisory-로-실패했을-때)로 Renovate 가 고칠 수 있는지 보고, 손으로 고칠 때는 아래 순서를 따른다.
 
 1. 같은 메이저 안에 수정 버전이 있으면 `pnpm-workspace.yaml` 의 `overrides` 로 올린다. Waline 의 peer 로 들어온 패키지는 lockfile 갱신으로 다시 풀리지 않아 override 가 필요하다. Waline 이 수정 버전을 직접 요구하게 되면 override 를 지운다.
 2. 수정이 메이저 변경을 요구하거나 수정 버전이 없고, 그 코드가 이 서버에서 실행되지 않을 때만 `auditConfig.ignoreGhsas` 에 넣는다. 지금은 LeanCloud·CloudBase 저장소 어댑터가 그렇다. 이 서버는 PostgreSQL 을 쓰므로 두 어댑터는 자격 증명이 없어 호출되지 않는다.
