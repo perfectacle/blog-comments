@@ -27,8 +27,9 @@
       "rangeStrategy": "auto"
     },
     {
-      "matchPackageNames": ["@dicebear/**"],
-      "groupName": "dicebear"
+      "description": "Only feeds scripts/build-avatars.mjs; a bump changes nothing until api/avatars.json is rebuilt by hand",
+      "matchPackageNames": ["@iconify-json/noto"],
+      "enabled": false
     },
     {
       "matchManagers": ["github-actions"],

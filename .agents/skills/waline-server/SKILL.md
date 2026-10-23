@@ -38,11 +38,11 @@ Waline 은 클라이언트가 보낸 `path`(`/2022/06/06/slug/`)를 `wl_comment.
 
 ### SRV-02 — 아바타 시드
 
-`avatarUrl` 은 이메일(소문자·trim)을, 없으면 닉네임을 sha256 해 DiceBear 시드로 쓴다. 아이콘은 저장하지 않고 응답마다 만든다.
+`avatarUrl` 은 이메일(소문자·trim)을, 없으면 닉네임을 sha256 해 그 해시로 `api/avatars.json` 의 동물 아이콘과 배경색을 고른다. 아이콘은 저장하지 않고 응답마다 만든다.
 
-- 이유: 시드·스타일·배경색을 바꾸면 옛 댓글을 포함한 모든 댓글의 아이콘이 바뀐다. 의도한 변경일 때만 바꾸고 PR 에 적는다.
+- 이유: 시드·아이콘 목록(순서 포함)·배경색을 바꾸면 옛 댓글을 포함한 모든 댓글의 아이콘이 바뀐다. 의도한 변경일 때만 바꾸고 PR 에 적는다.
 - 이메일은 해시로만 쓴다. 응답에 원문 이메일이 나가지 않아야 한다.
-- DiceBear 는 ESM 전용이라 `api/index.js` 위에서 `require` 하면 Waline 부팅이 멈춘다. 처음 쓸 때 `import()` 한다.
+- `api/avatars.json` 은 손으로 고치지 않는다. `scripts/build-avatars.mjs` 의 목록을 고치고 `node scripts/build-avatars.mjs` 로 다시 만든다. Noto 전체 세트(25MB)를 런타임에 읽지 않으려고 쓰는 아이콘만 저장소에 둔다.
 
 ### SRV-03 — DB 와 비밀값
 
