@@ -166,6 +166,7 @@ overrides:
   request>form-data: 2.5.6
   axios@<1: 0.34.0
   markdown-it@15: 15.0.3
+  dompurify@3: 3.4.17
 
 importers:
 
@@ -817,8 +818,8 @@ packages:
   dezalgo@1.0.4:
     resolution: {integrity: sha512-rXSP0bf+5n0Qonsb+SVVfNfIsimO4HEtmnIpPHY8Q1UCzKlQrDMfdobr8nJOOsRgWCyMRqeSBQzmWUMq7zvVig==}
 
-  dompurify@3.4.16:
-    resolution: {integrity: sha512-sqo+pNp3qRhCIpbgRi1y8Tgk27Bo2Ry7w0dC1NBeNTdZChWjz9Xb/KOoZbRP/R6pQZ80Qw8YhXw13hWWBbMRnQ==}
+  dompurify@3.4.17:
+    resolution: {integrity: sha512-B/pSlYVHQ58kqISD/yDjuJ1yfzI34m1gF4lAod2bwSRhiN4K5Cl3H8Af7hqB2PmTL911tdEudnnXn5FnhRoz0w==}
 
   dunder-proto@1.0.1:
     resolution: {integrity: sha512-KIN/nDJBQRcXw0MLVhZE9iQHmG68qAVIBg9CqmUYjmQIhgij9U5MFvrqkUL5FbtyyzZuOeOt0zdeRe4UY7ct+A==}
@@ -2400,7 +2401,7 @@ snapshots:
       '@mdit/plugin-sub': 1.1.2(markdown-it@15.0.3)
       '@mdit/plugin-sup': 1.1.2(markdown-it@15.0.3)
       akismet: 2.0.7
-      dompurify: 3.4.16
+      dompurify: 3.4.17
       fast-csv: 5.0.8
       form-data: 4.0.6
       ip2region: 2.3.0(@types/node@26.6.5)
@@ -2740,7 +2741,7 @@ snapshots:
       asap: 2.0.6
       wrappy: 1.0.2
 
-  dompurify@3.4.16:
+  dompurify@3.4.17:
     optionalDependencies:
       '@types/trusted-types': 2.0.7
 
