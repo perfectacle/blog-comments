@@ -26,12 +26,25 @@ jobs:
       matrix:
         task: ['format:check', audit]
     env:
-      # audit is time-dependent (new advisories land without any file changing), so it always runs.
+      # audit is time-dependent (new advisories land without any file changing), so its result is never reused.
       REUSE: ${{ matrix.task != 'audit' }}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
+
+      # A new advisory fails audit without any file changing. PRs that leave dependencies alone skip it rather than
+      # all failing at once; the daily audit workflow fixes such advisories, and main, dispatch and dependency PRs
+      # still run it.
+      - if: matrix.task == 'audit' && github.event_name == 'pull_request'
+        id: deps
+        env:
+          BASE: ${{ github.event.pull_request.base.sha }}
+        run: |
+          git fetch --no-tags --depth=1 origin "$BASE"
+          if git diff --quiet "$BASE" HEAD -- package.json pnpm-lock.yaml pnpm-workspace.yaml; then
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+          fi
 
       - id: fingerprint
         run: echo "key=verified-${{ matrix.task }}-${{ runner.arch }}-${{ hashFiles('**', '!.git/**') }}" >> "$GITHUB_OUTPUT"
@@ -44,10 +57,10 @@ jobs:
           key: ${{ steps.fingerprint.outputs.key }}
           lookup-only: true
 
-      - if: steps.verified.outputs.cache-hit != 'true'
+      - if: steps.verified.outputs.cache-hit != 'true' && steps.deps.outputs.skip != 'true'
         uses: ./.github/actions/setup
 
-      - if: steps.verified.outputs.cache-hit != 'true'
+      - if: steps.verified.outputs.cache-hit != 'true' && steps.deps.outputs.skip != 'true'
         run: pnpm run ${{ matrix.task }}
 
       - if: env.REUSE == 'true' && steps.verified.outputs.cache-hit != 'true'
