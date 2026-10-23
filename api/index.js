@@ -24,7 +24,8 @@ const avatarUrl = ({ mail, nick }) => {
   const svg =
     `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${size} ${size}">` +
     `<circle cx="${size / 2}" cy="${size / 2}" r="${size / 2}" fill="${background}"/>` +
-    `<g transform="translate(${size * 0.14} ${size * 0.14}) scale(0.72)">${body}</g></svg>`;
+    // Scaled so the corners of the square icon still fall inside the circle.
+    `<g transform="translate(${size * 0.16} ${size * 0.16}) scale(0.68)">${body}</g></svg>`;
 
   return `data:image/svg+xml;base64,${Buffer.from(svg).toString('base64')}`;
 };
