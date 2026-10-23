@@ -11,11 +11,6 @@ allowBuilds:
   # The postinstall script only prints a funding banner.
   core-js-pure: false
 
-minimumReleaseAgeExclude:
-  # Security fix for the markdown-it override below, and the argparse release it requires.
-  - markdown-it@15.0.3
-  - argparse@3.0.3
-
 overrides:
   # request pins ~2.3.2; GHSA-fjxv-7rqg-78g4, GHSA-hmw2-7cc7-3qxx. Reached through Akismet on every new comment.
   request>form-data: 2.5.6
