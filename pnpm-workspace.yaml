@@ -18,9 +18,9 @@ minimumReleaseAgeExclude:
 
 overrides:
   # request pins ~2.3.2; GHSA-fjxv-7rqg-78g4, GHSA-hmw2-7cc7-3qxx. Reached through Akismet on every new comment.
-  request>form-data: 4.0.6
+  request>form-data: 2.5.6
   # Only the CloudBase storage adapter uses 0.x; 0.34 clears its advisories without leaving the 0.x API.
-  axios@<1: 1.20.0
+  axios@<1: 0.34.0
   # GHSA-gfr2-rv44-r23c (comment rendering). Reached as a peer of @mdit/*, which a lockfile refresh never re-resolves.
   markdown-it@15: 15.0.3
   # GHSA-cg2g-xh64-v4q7, GHSA-mrv2-3pqr-j5jr. @waline/vercel pins 3.4.16 exactly and sanitizes rendered comments with it.

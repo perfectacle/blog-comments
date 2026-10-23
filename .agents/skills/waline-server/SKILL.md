@@ -11,13 +11,13 @@ description: 댓글 서버 코드(api/index.js), Vercel 설정(vercel.json), DB 
 
 1. **로컬 DB 를 띄운다** — 아무 PostgreSQL 에 `waline.pgsql` 을 넣는다.
    ```sh
-   docker run -d --name waline-db -e POSTGRES_DB=waline -e POSTGRES_PASSWORD=waline -p 55432:5432 postgres:17-alpine
+   docker run -d --name waline-db -e POSTGRES_DB=waline -e POSTGRES_PASSWORD=waline -p 55491:5432 postgres:17-alpine
    docker exec -i waline-db psql -U postgres -d waline < waline.pgsql
    ```
    완료: `wl_comment`·`wl_counter`·`wl_users` 테이블이 있다.
 2. **바꾸고 smoke 테스트를 돌린다** — CI 의 `test` 잡과 같은 환경 변수로 돌린다. `NODE_OPTIONS` 까지 CI 와 같게 하려면 `NODE_OPTIONS="--no-experimental-require-module $(jq -r '.env.NODE_OPTIONS // ""' vercel.json)"` 를 앞에 붙인다.
    ```sh
-   PG_HOST=127.0.0.1 PG_PORT=55432 PG_DB=waline PG_USER=postgres PG_PASSWORD=waline AKISMET_KEY=false IPQPS=0 pnpm test
+   PG_HOST=127.0.0.1 PG_PORT=55491 PG_DB=waline PG_USER=postgres PG_PASSWORD=waline AKISMET_KEY=false IPQPS=0 pnpm test
    ```
    `--test-force-exit` 는 Waline 이 DB 연결 풀을 닫지 않아 프로세스가 끝나지 않기 때문에 붙어 있다. 새 동작은 `tests/` 에 테스트를 더한다.
    완료: 전부 통과.

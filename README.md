@@ -10,9 +10,9 @@ Node 는 `.node-version`, pnpm 은 `package.json` 의 `packageManager` 에 고�
 
 ```sh
 pnpm install
-docker run -d --name waline-db -e POSTGRES_DB=waline -e POSTGRES_PASSWORD=waline -p 55432:5432 postgres:17-alpine
+docker run -d --name waline-db -e POSTGRES_DB=waline -e POSTGRES_PASSWORD=waline -p 55491:5432 postgres:17-alpine
 docker exec -i waline-db psql -U postgres -d waline < waline.pgsql
-PG_HOST=127.0.0.1 PG_PORT=55432 PG_DB=waline PG_USER=postgres PG_PASSWORD=waline AKISMET_KEY=false IPQPS=0 pnpm test
+PG_HOST=127.0.0.1 PG_PORT=55491 PG_DB=waline PG_USER=postgres PG_PASSWORD=waline AKISMET_KEY=false IPQPS=0 pnpm test
 ```
 
 작업 규칙은 [AGENTS.md](AGENTS.md) 에 있다.
