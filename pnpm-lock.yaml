@@ -684,8 +684,8 @@ packages:
     resolution: {integrity: sha512-8BIbcC6tPZMv2/PD4PrB3CtKks7LmAWhA7FRZK/6/b/WJ2RUz00KCga7gq50S4/RhZ22kxefRFGgsuts0v3eoA==}
     engines: {node: '>= 0.8'}
 
-  core-js-pure@3.50.0:
-    resolution: {integrity: sha512-6GP3Pxz4IKyWjAfa747vIu/jilB5z29JWROLqH/b+pXVcpgh6tM06ZIBwSuglgVqzDYURhOK6oEzTrG0bCHitA==}
+  core-js-pure@3.51.0:
+    resolution: {integrity: sha512-NE4SFDJ+qzQeqHG2vVSNwopzS6zZNPYJ5kinIqs+OofTqGzOmICgT89E/yvS9XY7rwb3eU1utWXTJ9nVFqv74A==}
 
   core-util-is@1.0.2:
     resolution: {integrity: sha512-3lqz5YjWTYnW6dlDa5TLaTCcShfar1e40rmcJVwCBJC6mWlFuj0eCHIElmG1g5kyuJ/GD+8Wn4FFCcz4gJPfaQ==}
@@ -1352,8 +1352,8 @@ packages:
   node-schedule@1.3.3:
     resolution: {integrity: sha512-uF9Ubn6luOPrcAYKfsXWimcJ1tPFtQ8I85wb4T3NgJQrXazEzojcFZVk46ZlLHby3eEJChgkV/0T689IsXh2Gw==}
 
-  nodemailer@10.1.6:
-    resolution: {integrity: sha512-8j/UEmA4AXr51URr3Ob0h+RCBtr0NKJ76Y2P9wJT6Eu3dRyruj2ULh2e6aiKrGg8nlUj1oX6N5h8dHA82EouaQ==}
+  nodemailer@10.1.7:
+    resolution: {integrity: sha512-OQa6FDln5fLttmqSbjDiRYvFDOFNrBqfiOwHPlEbURil3b+vPB1v8xpi+Sp46drzNDlsTnNsS502vthmz56r4w==}
     engines: {node: '>=20.0.0'}
 
   number-is-nan@1.0.1:
@@ -1884,8 +1884,8 @@ packages:
   undici-types@8.9.0:
     resolution: {integrity: sha512-KTDyRTYX8sWmKXAikPHHSyc63CRPETMctyjKFupcC6OBLXT3xsN0e9aF7m+mIXutFWpUXuedtowG7iLOzp0kQg==}
 
-  undici@8.12.2:
-    resolution: {integrity: sha512-XtuDWVdqTLr3NAxm2ly9/hU6kUsJOgGh1RASzMBbsw6aWCOaQzHdW+QQDfdERjfJ2V5vL5pRPa4RetO9UfivDg==}
+  undici@8.12.3:
+    resolution: {integrity: sha512-+fdndUTwBP86cVjihTp21hZHo7d6oj1c/47XPA3lL8mM0XHs+C4EkcjmgRsFnFk2f/UONGDy9ItBItmXsLOQHw==}
     engines: {node: '>=22.19.0'}
 
   universalify@0.1.2:
@@ -2015,7 +2015,7 @@ snapshots:
 
   '@babel/runtime-corejs3@7.29.10':
     dependencies:
-      core-js-pure: 3.50.0
+      core-js-pure: 3.51.0
 
   '@babel/runtime@7.29.10': {}
 
@@ -2107,7 +2107,7 @@ snapshots:
   '@cloudbase/wx-cloud-client-sdk@1.8.11':
     dependencies:
       '@cloudbase/adapter-wx_mp': 1.4.0
-      core-js-pure: 3.50.0
+      core-js-pure: 3.51.0
 
   '@csstools/color-helpers@6.1.2': {}
 
@@ -2315,7 +2315,7 @@ snapshots:
       koa-compose: 4.1.0
       leancloud-storage: 4.15.2
       markdown-it: 15.0.3
-      nodemailer: 10.1.6
+      nodemailer: 10.1.7
       nunjucks: 3.2.4
       phpass: 1.0.0
       prismjs: 1.30.0
@@ -2545,7 +2545,7 @@ snapshots:
       depd: 2.0.0
       keygrip: 1.1.0
 
-  core-js-pure@3.50.0: {}
+  core-js-pure@3.51.0: {}
 
   core-util-is@1.0.2: {}
 
@@ -2943,7 +2943,7 @@ snapshots:
       parse5: 8.0.1
       saxes: 6.0.0
       tough-cookie: 6.0.2
-      undici: 8.12.2
+      undici: 8.12.3
       w3c-xmlserializer: 6.0.0
       webidl-conversions: 8.0.1
       whatwg-mimetype: 5.0.0
@@ -3258,7 +3258,7 @@ snapshots:
       long-timeout: 0.1.1
       sorted-array-functions: 1.3.0
 
-  nodemailer@10.1.6: {}
+  nodemailer@10.1.7: {}
 
   number-is-nan@1.0.1: {}
 
@@ -3943,7 +3943,7 @@ snapshots:
 
   undici-types@8.9.0: {}
 
-  undici@8.12.2: {}
+  undici@8.12.3: {}
 
   universalify@0.1.2: {}
 
