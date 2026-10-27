@@ -205,11 +205,11 @@ packages:
     resolution: {integrity: sha512-0GEz8qJWokkUVYQYRukmkSHIFNoBH8QTreeHrAFbvz1XFYc3Y+puhMs8PQ5x8GNugiC2l5jvDBXKLbBIByeSBw==}
     hasBin: true
 
-  '@cloudbase/adapter-interface@0.7.1':
-    resolution: {integrity: sha512-BjHTAvIMSLxbp26SeT6qLiSSBygz3kAVno/PMwwBwjgzVkVUvuZGVcvf1mhHxY/BjdRGLrd6X60OgvymV/aAUw==}
+  '@cloudbase/adapter-interface@0.7.2':
+    resolution: {integrity: sha512-6bmBSUPw/Z9LAqx5h95YFZMhxjt+CRZ+z2/RqDY4zavj0nViXQ3xi7Hcdbw+uUKt0vOVjrjz/SmGAJxiDIluFg==}
 
-  '@cloudbase/adapter-wx_mp@1.4.0':
-    resolution: {integrity: sha512-6HM4IUS1qF7rjbl7v0mX6lO9l9QplSP9NwSnWTLwBRveLyGyXez2G2XSLI4AJkJAoQNo9Lw451u3Okt3OH2png==}
+  '@cloudbase/adapter-wx_mp@1.4.1':
+    resolution: {integrity: sha512-EEdsmANIh0TDeW2OAbjt+urpvX2xIr9U3HyqKyA2BVTJwvpgjKbONOIC7Ls5wqEvQ92ueeJ3vFCYrH1zlpmA+w==}
 
   '@cloudbase/ai@2.30.0':
     resolution: {integrity: sha512-RtBux47omXWcMhiiDDVJ96d2JlqnQ/bzKC6GG3ROgupYG3ReQyv1IssCpg5cnzmZ+l651IqdOpt27VTuO3kEGQ==}
@@ -1831,11 +1831,11 @@ packages:
     resolution: {integrity: sha512-KsFvLJp7r4sU7VqzicNx/mIEZeZhOxJ6F7uRKBwTEPTFnOMw2/7QsRL/usRnL/Zt0lKHMyKJh/xhq5Mo9Eb7AA==}
     engines: {node: '>=18.0.0'}
 
-  tldts-core@7.4.18:
-    resolution: {integrity: sha512-KI2PKvCmvQI/xD6ypPqkU0i7oxNXR/O58RLRaHR4svsgVUQ2JE/XC8BtMbG6PSehD27I8sZJRcC1ASnCy6lp3g==}
+  tldts-core@7.4.19:
+    resolution: {integrity: sha512-goNXV6Ho9TIOfpJZanTd6CKG5DyYgYAL+k+22T0SLh8l6+KHIfBUPFuePuSZv05UttIaaLmI9tb7TmGIdK5AkQ==}
 
-  tldts@7.4.18:
-    resolution: {integrity: sha512-somxA8xKAUzlAxl0TX/jMSYIbRNFIVGnI96pVGJPeMc5BsHmfVXn6mOJT6U++ELnl04eGfzpfcEuZe8WiASkXg==}
+  tldts@7.4.19:
+    resolution: {integrity: sha512-48dH6aSpQnpbzDUc4vIQZ1VjB8tkK+e8c1yx05/SZK+rkssgjEOlxDd/yU8/a4vGYQ9vRgJr9dwMq9TJ0b3X2Q==}
     hasBin: true
 
   toidentifier@1.0.1:
@@ -2023,11 +2023,11 @@ snapshots:
     dependencies:
       css-tree: 3.2.1
 
-  '@cloudbase/adapter-interface@0.7.1': {}
+  '@cloudbase/adapter-interface@0.7.2': {}
 
-  '@cloudbase/adapter-wx_mp@1.4.0':
+  '@cloudbase/adapter-wx_mp@1.4.1':
     dependencies:
-      '@cloudbase/adapter-interface': 0.7.1
+      '@cloudbase/adapter-interface': 0.7.2
       web-streams-polyfill: 4.3.0
 
   '@cloudbase/ai@2.30.0':
@@ -2040,8 +2040,8 @@ snapshots:
 
   '@cloudbase/app@2.32.0(@cloudbase/signature-nodejs@2.2.2)(jsonwebtoken@9.0.3)':
     dependencies:
-      '@cloudbase/adapter-interface': 0.7.1
-      '@cloudbase/adapter-wx_mp': 1.4.0
+      '@cloudbase/adapter-interface': 0.7.2
+      '@cloudbase/adapter-wx_mp': 1.4.1
       '@cloudbase/types': 2.32.0
       '@cloudbase/utilities': 2.32.0
     optionalDependencies:
@@ -2086,27 +2086,27 @@ snapshots:
 
   '@cloudbase/types@2.30.0':
     dependencies:
-      '@cloudbase/adapter-interface': 0.7.1
+      '@cloudbase/adapter-interface': 0.7.2
 
   '@cloudbase/types@2.32.0':
     dependencies:
-      '@cloudbase/adapter-interface': 0.7.1
+      '@cloudbase/adapter-interface': 0.7.2
 
   '@cloudbase/utilities@2.30.0':
     dependencies:
-      '@cloudbase/adapter-interface': 0.7.1
+      '@cloudbase/adapter-interface': 0.7.2
       '@cloudbase/types': 2.30.0
       jwt-decode: 3.1.2
 
   '@cloudbase/utilities@2.32.0':
     dependencies:
-      '@cloudbase/adapter-interface': 0.7.1
+      '@cloudbase/adapter-interface': 0.7.2
       '@cloudbase/types': 2.32.0
       jwt-decode: 3.1.2
 
   '@cloudbase/wx-cloud-client-sdk@1.8.11':
     dependencies:
-      '@cloudbase/adapter-wx_mp': 1.4.0
+      '@cloudbase/adapter-wx_mp': 1.4.1
       core-js-pure: 3.51.0
 
   '@csstools/color-helpers@6.1.2': {}
@@ -3894,11 +3894,11 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  tldts-core@7.4.18: {}
+  tldts-core@7.4.19: {}
 
-  tldts@7.4.18:
+  tldts@7.4.19:
     dependencies:
-      tldts-core: 7.4.18
+      tldts-core: 7.4.19
 
   toidentifier@1.0.1: {}
 
@@ -3909,7 +3909,7 @@ snapshots:
 
   tough-cookie@6.0.2:
     dependencies:
-      tldts: 7.4.18
+      tldts: 7.4.19
 
   tr46@7.0.0:
     dependencies:
