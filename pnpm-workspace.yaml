@@ -20,6 +20,8 @@ overrides:
   markdown-it@15: 15.0.3
   # GHSA-cg2g-xh64-v4q7, GHSA-mrv2-3pqr-j5jr. @waline/vercel pins 3.4.16 exactly and sanitizes rendered comments with it.
   dompurify@3: 3.4.17
+  # GHSA-mrwp-f3q8-3g9p; pinned by the audit workflow.
+  follow-redirects@1: 1.16.2
 
 auditConfig:
   # Advisories with no fix in the dependency's major, in storage adapters that only run when their own credentials
@@ -34,3 +36,7 @@ auditConfig:
     - GHSA-xq3m-2v4x-88gg
     # lodash.set via @cloudbase/database (CloudBase adapter); unmaintained, no patched release.
     - GHSA-p6mc-m468-83gw
+
+minimumReleaseAgeExclude:
+  # Security fix (GHSA-mrwp-f3q8-3g9p); drop once past the cooldown.
+  - follow-redirects@1.16.2
