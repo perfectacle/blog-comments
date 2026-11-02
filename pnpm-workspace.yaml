@@ -36,7 +36,3 @@ auditConfig:
     - GHSA-xq3m-2v4x-88gg
     # lodash.set via @cloudbase/database (CloudBase adapter); unmaintained, no patched release.
     - GHSA-p6mc-m468-83gw
-
-minimumReleaseAgeExclude:
-  # Security fix (GHSA-mrwp-f3q8-3g9p); drop once past the cooldown.
-  - follow-redirects@1.16.2
