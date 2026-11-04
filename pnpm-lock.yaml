@@ -1523,8 +1523,8 @@ packages:
     resolution: {integrity: sha512-xJzjKStYxaGLtRcrTObZx0XE63h+pdTxqrLZaPtpeIn/fKllOeOkYrAwKjpLMlEr+/dFMFHfDDxTElVn6Sb/Gg==}
     engines: {node: '>=8.0.0'}
 
-  qs@6.16.1:
-    resolution: {integrity: sha512-5Px6J7rfHBAGUhNQ3es4YzcOdBBw0SDcVtThJml4RdnKw4tKs2epA0kPZ+K8X+WiHktT93RHVcQ/3ym5aTCgtg==}
+  qs@6.17.0:
+    resolution: {integrity: sha512-5LK5BZ2XDHMvcUJaf0CQ5HL3aVgKbpklvByC7qLSxYkfE8COEEbJg5xCHWCTqzqi0Gs4Jn5Mv5v3R38W6edscA==}
     engines: {node: '>=0.6'}
 
   qs@6.5.5:
@@ -1832,8 +1832,8 @@ packages:
     resolution: {integrity: sha512-KsFvLJp7r4sU7VqzicNx/mIEZeZhOxJ6F7uRKBwTEPTFnOMw2/7QsRL/usRnL/Zt0lKHMyKJh/xhq5Mo9Eb7AA==}
     engines: {node: '>=18.0.0'}
 
-  tldts-core@7.4.19:
-    resolution: {integrity: sha512-goNXV6Ho9TIOfpJZanTd6CKG5DyYgYAL+k+22T0SLh8l6+KHIfBUPFuePuSZv05UttIaaLmI9tb7TmGIdK5AkQ==}
+  tldts-core@7.4.20:
+    resolution: {integrity: sha512-C630TWXZCZmLq0F2bW4QqwnaaxCQ/svpAqvJwnC4JvgEM5ohhBnGsEzTLSOXcN+xjz+kEaHS5uoWIw2klnqd0A==}
 
   tldts@7.4.19:
     resolution: {integrity: sha512-48dH6aSpQnpbzDUc4vIQZ1VjB8tkK+e8c1yx05/SZK+rkssgjEOlxDd/yU8/a4vGYQ9vRgJr9dwMq9TJ0b3X2Q==}
@@ -2729,7 +2729,7 @@ snapshots:
       '@paralleldrive/cuid2': 2.3.1
       dezalgo: 1.0.4
       once: 1.4.0
-      qs: 6.16.1
+      qs: 6.17.0
 
   fresh@0.5.2: {}
 
@@ -3394,7 +3394,7 @@ snapshots:
 
   pure-uuid@2.0.0: {}
 
-  qs@6.16.1:
+  qs@6.17.0:
     dependencies:
       es-define-property: 1.0.1
       side-channel: 1.1.1
@@ -3627,7 +3627,7 @@ snapshots:
       formidable: 1.2.6
       methods: 1.1.2
       mime: 2.6.0
-      qs: 6.16.1
+      qs: 6.17.0
       readable-stream: 3.6.2
       semver: 7.8.5
     transitivePeerDependencies:
@@ -3643,7 +3643,7 @@ snapshots:
       formidable: 2.1.5
       methods: 1.1.2
       mime: 2.6.0
-      qs: 6.16.1
+      qs: 6.17.0
       semver: 7.8.5
     transitivePeerDependencies:
       - supports-color
@@ -3895,11 +3895,11 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  tldts-core@7.4.19: {}
+  tldts-core@7.4.20: {}
 
   tldts@7.4.19:
     dependencies:
-      tldts-core: 7.4.19
+      tldts-core: 7.4.20
 
   toidentifier@1.0.1: {}
 
@@ -3957,7 +3957,7 @@ snapshots:
   url@0.11.4:
     dependencies:
       punycode: 1.4.1
-      qs: 6.16.1
+      qs: 6.17.0
 
   util-deprecate@1.0.2: {}
 
