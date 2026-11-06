@@ -33,6 +33,8 @@ const avatarUrl = ({ mail, nick }) => {
 module.exports = Application({
   plugins: [],
   avatarUrl,
+  // Browser and OS labels (e.g. "Chrome155.0", "Windows 10") say nothing useful about a comment.
+  disableUserAgent: true,
 });
 
 // Waline labels each comment with a region looked up from the commenter's IP, but its bundled ip2region database
