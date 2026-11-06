@@ -11,7 +11,7 @@ description: 댓글 서버 코드(api/index.js), Vercel 설정(vercel.json), DB 
 
 1. **로컬 DB 를 띄운다** — 아무 PostgreSQL 에 `waline.pgsql` 을 넣는다.
    ```sh
-   docker run -d --name waline-db -e POSTGRES_DB=waline -e POSTGRES_PASSWORD=waline -p 55491:5432 postgres:17-alpine
+   docker run -d --name waline-db -e POSTGRES_DB=waline -e POSTGRES_PASSWORD=waline -p 55491:5432 postgres:18-alpine
    docker exec -i waline-db psql -U postgres -d waline < waline.pgsql
    ```
    완료: `wl_comment`·`wl_counter`·`wl_users` 테이블이 있다.
