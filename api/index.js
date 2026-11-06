@@ -34,3 +34,8 @@ module.exports = Application({
   plugins: [],
   avatarUrl,
 });
+
+// Waline labels each comment with a region looked up from the commenter's IP, but its bundled ip2region database
+// only has Chinese place names (Seoul shows as 首尔). DISABLE_REGION would still show them to admins, so the lookup
+// itself is turned off. `think` is the global ThinkJS sets up while `Application()` loads, so this must come after it.
+think.ip2region = async () => '';

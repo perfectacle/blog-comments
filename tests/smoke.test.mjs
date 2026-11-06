@@ -24,7 +24,8 @@ after(() => server?.close());
 const post = async nick => {
   const res = await fetch(`${base}/api/comment`, {
     method: 'POST',
-    headers: { 'content-type': 'application/json' },
+    // A Seoul address that ip2region names 首尔, so the region check below has something to hide.
+    headers: { 'content-type': 'application/json', 'x-forwarded-for': '121.134.5.6' },
     body: JSON.stringify({ comment: `smoke from ${nick}`, nick, url: path }),
   });
   assert.equal(res.status, 200);
@@ -45,4 +46,5 @@ test('anonymous comments are stored under the post path with a per-commenter ava
   assert.equal(comments.length, 2);
   for (const { avatar } of comments) assert.match(avatar, /^data:image\/svg\+xml/);
   assert.notEqual(comments[0].avatar, comments[1].avatar);
+  for (const { addr } of comments) assert.ok(!addr, `region label leaked: ${addr}`);
 });
