@@ -1602,8 +1602,8 @@ packages:
     resolution: {integrity: sha512-xAg7SOnEhrm5zI3puOOKyy1OMcMlIJZYNJY7xLBwSze0UjhPLnWfj2GF2EpT0jmzaJKIWKHLsaSSajf35bcYnA==}
     engines: {node: '>=v12.22.7'}
 
-  semver@7.8.5:
-    resolution: {integrity: sha512-Y7/KDsb8LjooZpwaqGyulO6DQlksgCncchHGk+sZIY4SBvUocMBEFH5Ur1fI4dV+Jvl0w6cjvucaIi40puRioA==}
+  semver@7.8.6:
+    resolution: {integrity: sha512-9lpSSU4Mly3mrtruwLs1eLK6+gzbzqeBFwRNjIjE+9LuDpWdYctrQlQ3ej1Ilgi7gknpsTRnPoLP8DpCHqHIJw==}
     engines: {node: '>=10'}
     hasBin: true
 
@@ -1931,8 +1931,8 @@ packages:
     resolution: {integrity: sha512-4Nsy8K5Tr6SPDH9jhKJOHf7ChDrc1zufZTVSF7x72hwuEXBqxqk9G6cK+K2NRUtB3iELRJqjXb4JPDMBjMTl2Q==}
     engines: {node: ^22.22.2 || ^24.15.0 || >=26.0.0}
 
-  web-streams-polyfill@4.3.0:
-    resolution: {integrity: sha512-/Gnggvj9oSrEvJbDyyPtAnxBt5fGQM2iWOKQNu7ie1OxDgK40iZpyV3TKaRiEzVj1oA1UxKnEy9XPXh6PW3eVw==}
+  web-streams-polyfill@4.5.0:
+    resolution: {integrity: sha512-gyspQMAvFksFV9AD4ZRjIWeJ6YUrERepTWhTgeUiFB3aivXHiWBXcEx5i6tp1/SQs0LmHJJIV7CmfqC/cwofqg==}
     engines: {node: '>= 8'}
 
   webidl-conversions@8.0.1:
@@ -2033,7 +2033,7 @@ snapshots:
   '@cloudbase/adapter-wx_mp@1.4.1':
     dependencies:
       '@cloudbase/adapter-interface': 0.7.2
-      web-streams-polyfill: 4.3.0
+      web-streams-polyfill: 4.5.0
 
   '@cloudbase/ai@2.30.0':
     dependencies:
@@ -2041,7 +2041,7 @@ snapshots:
       '@cloudbase/utilities': 2.30.0
       '@mattiasbuelens/web-streams-adapter': 0.1.0
       text-encoding-shim: 1.0.5
-      web-streams-polyfill: 4.3.0
+      web-streams-polyfill: 4.5.0
 
   '@cloudbase/app@2.32.0(@cloudbase/signature-nodejs@2.2.2)(jsonwebtoken@9.0.3)':
     dependencies:
@@ -2075,7 +2075,7 @@ snapshots:
       https-proxy-agent: 5.0.1
       jsonwebtoken: 9.0.3
       retry: 0.13.1
-      web-streams-polyfill: 4.3.0
+      web-streams-polyfill: 4.5.0
       xml2js: 0.6.2
     transitivePeerDependencies:
       - debug
@@ -2980,7 +2980,7 @@ snapshots:
       lodash.isstring: 4.0.1
       lodash.once: 4.1.1
       ms: 2.1.3
-      semver: 7.8.5
+      semver: 7.8.6
 
   jsprim@1.4.2:
     dependencies:
@@ -3503,7 +3503,7 @@ snapshots:
     dependencies:
       xmlchars: 2.2.0
 
-  semver@7.8.5: {}
+  semver@7.8.6: {}
 
   set-function-length@1.2.2:
     dependencies:
@@ -3635,7 +3635,7 @@ snapshots:
       mime: 2.6.0
       qs: 6.17.1
       readable-stream: 3.6.2
-      semver: 7.8.5
+      semver: 7.8.6
     transitivePeerDependencies:
       - supports-color
 
@@ -3650,7 +3650,7 @@ snapshots:
       methods: 1.1.2
       mime: 2.6.0
       qs: 6.17.1
-      semver: 7.8.5
+      semver: 7.8.6
     transitivePeerDependencies:
       - supports-color
 
@@ -3983,7 +3983,7 @@ snapshots:
     dependencies:
       xml-name-validator: 5.0.0
 
-  web-streams-polyfill@4.3.0: {}
+  web-streams-polyfill@4.5.0: {}
 
   webidl-conversions@8.0.1: {}
 
