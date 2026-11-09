@@ -11,7 +11,7 @@
     "node": "26.x"
   },
   "dependencies": {
-    "@waline/vercel": "1.43.4"
+    "@waline/vercel": "1.43.5"
   },
   "devDependencies": {
     "@iconify-json/noto": "1.2.9",
