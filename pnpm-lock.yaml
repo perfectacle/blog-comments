@@ -174,8 +174,8 @@ importers:
   .:
     dependencies:
       '@waline/vercel':
-        specifier: 1.43.5
-        version: 1.43.5(@noble/hashes@1.8.0)(@types/node@26.6.6)(aws4@1.13.2)(debug@4.4.3)
+        specifier: 1.43.6
+        version: 1.43.6(@noble/hashes@1.8.0)(@types/node@26.6.6)(aws4@1.13.2)(debug@4.4.3)
     devDependencies:
       '@iconify-json/noto':
         specifier: 1.2.9
@@ -459,8 +459,8 @@ packages:
   '@types/ws@7.4.7':
     resolution: {integrity: sha512-JQbbmxZTZehdc2iszGKs5oC3NFnjeay7mtAWrdt7qNtAVK0g19muApzAy4bm9byz79xa2ZnO/BOBC2R8RC5Lww==}
 
-  '@waline/vercel@1.43.5':
-    resolution: {integrity: sha512-0RWxVEhxy8YlMzzFVeOwq6UfVWgNGBqKPJw9ctjaz2858tZCjKEalyzFj+Esqfv0+r8ApNyhMVR/oAU76W/v8Q==}
+  '@waline/vercel@1.43.6':
+    resolution: {integrity: sha512-9HlzJpM9OnXqQRo9Ps866c1FDDipAOVB+uQHDv06gbmRwHylt6xeAuSQ2L7XchrK0Pr2gforcCU8Rf1/DBCfyA==}
     engines: {node: ^26.0.0}
     bundledDependencies:
       - '@waline/core'
@@ -2298,7 +2298,7 @@ snapshots:
     dependencies:
       '@types/node': 26.6.6
 
-  '@waline/vercel@1.43.5(@noble/hashes@1.8.0)(@types/node@26.6.6)(aws4@1.13.2)(debug@4.4.3)':
+  '@waline/vercel@1.43.6(@noble/hashes@1.8.0)(@types/node@26.6.6)(aws4@1.13.2)(debug@4.4.3)':
     dependencies:
       '@cloudbase/node-sdk': 3.18.7(debug@4.4.3)
       '@koa/cors': 5.0.0
