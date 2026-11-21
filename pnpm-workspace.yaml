@@ -19,7 +19,7 @@ overrides:
   # GHSA-gfr2-rv44-r23c (comment rendering). Reached as a peer of @mdit/*, which a lockfile refresh never re-resolves.
   markdown-it@15: 15.0.3
   # GHSA-cg2g-xh64-v4q7, GHSA-mrv2-3pqr-j5jr. @waline/vercel pins 3.4.16 exactly and sanitizes rendered comments with it.
-  dompurify@3: 3.4.17
+  dompurify@3: 3.4.18
   # GHSA-mrwp-f3q8-3g9p; pinned by the audit workflow.
   follow-redirects@1: 1.16.3
 
