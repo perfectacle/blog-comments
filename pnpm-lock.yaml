@@ -241,8 +241,8 @@ packages:
   '@cloudbase/database@1.4.3':
     resolution: {integrity: sha512-JzmdsGjy9LwzSQQ0Fv4OlNHNK61BRXdJSembTpy4408AQA3q2Ip3N5eB3v9OpAlFMvP/6MGmOQ/ZuUPKfJddJA==}
 
-  '@cloudbase/node-sdk@3.18.7':
-    resolution: {integrity: sha512-vBJR1lsSXH2C8Dc12FmFxCx+H2+CXJTwEUQ7sjkoih+hTk6UrhA5UaDCxTaZUn59AN0vM/VhvggR9EDsQJXCdQ==}
+  '@cloudbase/node-sdk@3.18.8':
+    resolution: {integrity: sha512-wi75fAt2wstX4VeejO/Fb1bRiVCiktbMHVE10WLEyoe4zJE/JXzIK6YqUdrzMDk2hbKhWZ9DaBDdLrLzvdzNGA==}
     engines: {node: '>=12'}
 
   '@cloudbase/signature-nodejs@2.2.2':
@@ -1685,8 +1685,8 @@ packages:
     resolution: {integrity: sha512-UcjcJOWknrNkF6PLX83qcHM6KHgVKNkV62Y8a5uYDVv9ydGQVwAHMKqHdJje1VTWpljG0WYpCDhrCdAOYH4TWg==}
     engines: {node: '>= 10.x'}
 
-  sql-escaper@1.6.0:
-    resolution: {integrity: sha512-I+WA4xb3mprpxUbLFtraZRY8L4vI0+xEOPLxHSI4wOuZ8cSpjVBzeuQpnPjW6PfdjeSkD9n/IBoYzH0LGTVSoQ==}
+  sql-escaper@1.7.0:
+    resolution: {integrity: sha512-ZgP6E9SPnhrhWXxd8+nLKPot3Euzyo3Rpxe6EFAYz2Ffaq9Xg2SH+6d4yJi7vsQDHaQlhzQ1phAopgE6+a1UCQ==}
     engines: {bun: '>=1.0.0', deno: '>=2.0.0', node: '>=12.0.0'}
 
   sqlstring@2.3.1:
@@ -2084,7 +2084,7 @@ snapshots:
       lodash.set: 4.3.2
       lodash.unset: 4.5.2
 
-  '@cloudbase/node-sdk@3.18.7(debug@4.4.3)':
+  '@cloudbase/node-sdk@3.18.8(debug@4.4.3)':
     dependencies:
       '@cloudbase/ai': 2.32.0
       '@cloudbase/app': 2.32.0(@cloudbase/signature-nodejs@2.2.2)(jsonwebtoken@9.0.3)
@@ -2328,7 +2328,7 @@ snapshots:
 
   '@waline/vercel@1.43.7(@noble/hashes@1.8.0)(@types/node@26.6.6)(aws4@1.13.2)(debug@4.4.3)':
     dependencies:
-      '@cloudbase/node-sdk': 3.18.7(debug@4.4.3)
+      '@cloudbase/node-sdk': 3.18.8(debug@4.4.3)
       '@koa/cors': 5.0.0
       '@mathjax/mathjax-tex-font': 4.1.3
       '@mathjax/src': 4.1.3
@@ -3263,7 +3263,7 @@ snapshots:
       long: 5.3.2
       lru.min: 1.1.5
       named-placeholders: 1.1.6
-      sql-escaper: 1.6.0
+      sql-escaper: 1.7.0
 
   mysql@2.18.1:
     dependencies:
@@ -3600,7 +3600,7 @@ snapshots:
 
   split2@4.2.0: {}
 
-  sql-escaper@1.6.0: {}
+  sql-escaper@1.7.0: {}
 
   sqlstring@2.3.1: {}
 
